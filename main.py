@@ -143,7 +143,7 @@ with st.container():
 
             select_box2 = st.multiselect(
                 label="Select Neighbourhood Median You Want To Visualize", options=neighbourhoods,
-                default='Newton', max_selections=6)
+                default='Ang Mo Kio', max_selections=6)
 
             if select_box2 == []:
                 select_box2 = random.choice(neighbourhoods)
