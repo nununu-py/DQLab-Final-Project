@@ -22,7 +22,7 @@ st.set_page_config(
 
 # IMPORT DATA LISTING
 listing_df = pd.read_csv(
-    'D:\Portopolio\project 10 of 100 (DQLab Project)\Data\listing_byCountry.csv')
+    'Data\listing_byCountry.csv')
 
 # DROP UNNECESSARY COLUMN FROM DATA LISTING
 listing_df.drop(labels=["Unnamed: 0", "lat-long"], axis=1, inplace=True)
@@ -223,7 +223,7 @@ with st.container():
         # avg_price1 = data1.merge(avg_price, left_on='id', right_on='listing_id')
 
         review_df = pd.read_csv(
-            "D:\Portopolio\project 10 of 100 (DQLab Project)\Data\DQLab_reviews(22Sep2022).csv")
+            "Data\DQLab_reviews(22Sep2022).csv")
 
         order = listing_df.merge(
             review_df, left_on="id", right_on="listing_id")
