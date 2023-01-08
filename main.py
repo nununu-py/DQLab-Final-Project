@@ -99,12 +99,12 @@ with st.container():
 
         with col2:
 
-            fig, ax = plt.subplots()
-            sns.boxplot(data=listing_df, x="country name", y="price", ax=ax)
-            ax.set_xlabel("\nCountry Name", fontdict=FONT)
-            ax.set_ylabel("Price", fontdict=FONT)
+#             fig, ax = plt.subplots()
+#             sns.boxplot(data=listing_df, x="country name", y="price", ax=ax)
+#             ax.set_xlabel("\nCountry Name", fontdict=FONT)
+#             ax.set_ylabel("Price", fontdict=FONT)
 
-            st.pyplot(fig)
+#             st.pyplot(fig)
 
         st.text_area(
             label="", value="According to the diagrams above we can see the distribution of listing prices from Airbnb singapore from 2018 to 2022")
