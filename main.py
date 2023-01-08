@@ -321,6 +321,7 @@ with st.container():
 
     # st.dataframe(high_reviews)
 
+    
     question5 = st.container()
 
     with question5:
@@ -336,15 +337,20 @@ with st.container():
         high_reviews_map.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
         st.plotly_chart(high_reviews_map)
 
-        st.warning(
-            "Show the table to see which neighborhood group has the most listings reviews")
+        data = high_reviews.groupby(['neighbourhood_group'])[
+            'name'].size().to_frame('Total Listing').reset_index()
 
-        with st.expander(label="Check Table : Listing that have above average reviews per neighborhood group"):
+        fig = px.bar(
+            data,
+            x="neighbourhood_group",
+            y="Total Listing", color='neighbourhood_group')
+        fig.update_layout(yaxis_title="Total Listing",
+                          xaxis_title="Region")
 
-            data = high_reviews.groupby(['neighbourhood_group'])[
-                'name'].size().to_frame('Total Listing').reset_index()
+        st.plotly_chart(fig)
 
-            st.dataframe(data)
+        st.markdown('---')
+
 
 # FOOTER
 # ------------------------------------------------------------------------------------------------
