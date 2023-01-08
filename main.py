@@ -20,8 +20,15 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# IMPORT DATA LISTING
-listing_df = pd.read_csv('./Data/listing_byCountry.csv')
+# READ DATA
+listing_df = pd.read_csv(
+    '.Data/listing_byCountry.csv')
+
+review_df = pd.read_csv(
+    "./Data/DQLab_reviews(22Sep2022).csv")
+
+neighbourhoodsGroup_df = pd.read_csv(
+    "./Data/DQLab_nieghbourhood(22Sep2022).csv")
 
 # DROP UNNECESSARY COLUMN FROM DATA LISTING
 listing_df.drop(labels=["Unnamed: 0", "lat-long"], axis=1, inplace=True)
@@ -59,6 +66,8 @@ if hidedata_BTN:
 
     showdata_BNT = False
 
+# TOP PAGE
+
 # MAIN PAGE
 with st.container():
     st.markdown("""
@@ -88,6 +97,17 @@ with st.container():
 
             st.pyplot(fig)
 
+        with col2:
+
+            fig, ax = plt.subplots()
+            sns.boxplot(data=listing_df, x="country name", y="price", ax=ax)
+            ax.set_xlabel("\nCountry Name", fontdict=FONT)
+            ax.set_ylabel("Price", fontdict=FONT)
+
+            st.pyplot(fig)
+
+        st.text_area(
+            label="", value="According to the diagrams above we can see the distribution of listing prices from Airbnb singapore from 2018 to 2022")
         st.markdown('---')
 
     # Question2
@@ -114,7 +134,7 @@ with st.container():
 
             select_box1 = st.multiselect(
                 label="Select Neighbourhood Mean You Want To Visualize", options=neighbourhoods,
-                default=neighbourhoods[0], max_selections=7)
+                default=["Rochor", "Pasir Ris", "Marina South", "Southern Islands"], max_selections=7)
 
             if select_box1 == []:
                 select_box1 = random.choice(neighbourhoods)
@@ -150,7 +170,7 @@ with st.container():
 
             select_box2 = st.multiselect(
                 label="Select Neighbourhood Median You Want To Visualize", options=neighbourhoods,
-                default='Ang Mo Kio', max_selections=6)
+                default=["Rochor", "Pasir Ris", "Marina South", "Southern Islands"], max_selections=6)
 
             if select_box2 == []:
                 select_box2 = random.choice(neighbourhoods)
@@ -174,6 +194,9 @@ with st.container():
 
             with check_priceDisNei_med:
                 st.dataframe(price_trendNei_median)
+
+        st.text_area(
+            label=" ", value="By exploring the data visualization above, we can conclude that the neighborhood with the highest average price based on the room type \"Entire Home/apt\" is in Southern Island. The \"Private Room\" room type is in Marina South, the \"Hotel Room\" type is in the Rochor area and finally, the \"Shared Room\" is located in Pasir Ris neighbourhood, this can be happend because there aren't a lot of properties available for rent in this neighborhood area.")
 
         st.markdown('---')
 
@@ -212,6 +235,9 @@ with st.container():
             with st.expander("Check Table : Average Price Distribution For Each Room Type"):
                 st.dataframe(price_byRoom)
 
+        st.text_area(
+            label="  ", value="Based on the data visualization above, it can be clearly concluded that the room type greatly influences the price of a property for rent.")
+
         st.markdown('---')
 
     # Question4
@@ -224,9 +250,6 @@ with st.container():
             """)
 
         # avg_price1 = data1.merge(avg_price, left_on='id', right_on='listing_id')
-
-        review_df = pd.read_csv(
-            "./Data/DQLab_reviews(22Sep2022).csv")
 
         review_df = review_df.drop(labels=["Unnamed: 0"], axis=1)
 
@@ -265,12 +288,12 @@ with st.container():
             top20_trendsOrder.drop(labels=["index"], axis=1, inplace=True)
             st.dataframe(top20_trendsOrder.head(20))
 
+        st.text_area(label="    ", value="According to the results of the data visualization with the line chart above, we can conclude that the trend order listing of all the highest room type and neighborhood categories is in the range from September 2019 to February 2020 and thereafter decreased until the following year. This could be due to an outbreak covid, so people prefer to stay at home. This listing trend only experienced an increase again in May 2022, because All remaining COVID-19 restrictions were lifted progressively on 29 March 2022 and 26 April 2022 but mask wearing is optional for some places.")
         st.markdown("---")
 
 # NEW FRAME
 # ------------------------------------------------------------------------------------------------
 
-    neighbourhoodsGroup_df = pd.read_csv("./Data/DQLab_nieghbourhood(22Sep2022).csv")
     neighbourhoodsGroup_df = neighbourhoodsGroup_df.drop(
         labels=["Unnamed: 0"], axis=1)
 
@@ -313,6 +336,9 @@ with st.container():
         high_reviews_map.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
         st.plotly_chart(high_reviews_map)
 
+        st.warning(
+            "Show the table to see which neighborhood group has the most listings reviews")
+
         with st.expander(label="Check Table : Listing that have above average reviews per neighborhood group"):
 
             data = high_reviews.groupby(['neighbourhood_group'])[
@@ -322,6 +348,9 @@ with st.container():
 
 # FOOTER
 # ------------------------------------------------------------------------------------------------
+
+for i in range(4):
+    st.write("")
 
 st.markdown("""
     <h5 style='text-align: center; color: #1746A2;'>For more airbnb data visualization, please visit my Friend streamlit webapp</h5>
