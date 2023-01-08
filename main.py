@@ -21,7 +21,7 @@ st.set_page_config(
 )
 
 # IMPORT DATA LISTING
-listing_df = pd.read_csv('Data\listing_byCountry.csv')
+listing_df = pd.read_csv('./Data/listing_byCountry.csv')
 
 # DROP UNNECESSARY COLUMN FROM DATA LISTING
 listing_df.drop(labels=["Unnamed: 0", "lat-long"], axis=1, inplace=True)
@@ -226,7 +226,7 @@ with st.container():
         # avg_price1 = data1.merge(avg_price, left_on='id', right_on='listing_id')
 
         review_df = pd.read_csv(
-            "Data\DQLab_reviews(22Sep2022).csv")
+            "./Data/DQLab_reviews(22Sep2022).csv")
 
         review_df = review_df.drop(labels=["Unnamed: 0"], axis=1)
 
@@ -270,7 +270,7 @@ with st.container():
 # NEW FRAME
 # ------------------------------------------------------------------------------------------------
 
-    neighbourhoodsGroup_df = pd.read_csv("Data\DQLab_nieghbourhood(22Sep2022).csv")
+    neighbourhoodsGroup_df = pd.read_csv("./Data/DQLab_nieghbourhood(22Sep2022).csv")
     neighbourhoodsGroup_df = neighbourhoodsGroup_df.drop(
         labels=["Unnamed: 0"], axis=1)
 
