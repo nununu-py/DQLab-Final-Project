@@ -359,6 +359,7 @@ st.markdown("""
 
 st.markdown("""
     
-    [<h5 style='text-align: center; color: #5F9DF7 ;'>Gustav Airbnb Project</h5>](https://twitter.com/sleepinkMgkawak)
+    [<h5 style='text-align: center; color: #5F9DF7 ;'>Gustav Airbnb Project</h5>](https://gustavsmnt-airbnb-project-project-airbnb-uszn1j.streamlit.app/
+)
 
 """, unsafe_allow_html=True)
