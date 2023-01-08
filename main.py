@@ -22,7 +22,7 @@ st.set_page_config(
 
 # IMPORT DATA LISTING
 listing_df = pd.read_csv(
-    'Data\listing_byCountry.csv')
+    'Data\\listing_byCountry.csv')
 
 # DROP UNNECESSARY COLUMN FROM DATA LISTING
 listing_df.drop(labels=["Unnamed: 0", "lat-long"], axis=1, inplace=True)
