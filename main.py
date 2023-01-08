@@ -19,9 +19,10 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
 )
+
 # IMPORT DATA LISTING
 listing_df = pd.read_csv(
-    'listing_byCountry.csv')
+    'D:\Portopolio\project 10 of 100 (DQLab Project)\Data\listing_byCountry.csv')
 
 # DROP UNNECESSARY COLUMN FROM DATA LISTING
 listing_df.drop(labels=["Unnamed: 0", "lat-long"], axis=1, inplace=True)
@@ -34,7 +35,6 @@ listing_df = listing_df[listing_df['country name'] == "Singapore"]
 listing_df = listing_df.sort_values("price", ascending=False)
 listing_df = listing_df[15:][:]
 
-
 # SIDE BAR
 sidebar = st.sidebar
 sidebar.image(
@@ -45,7 +45,6 @@ showdata_BNT = sidebar.button(label="Show Data Table")
 sidebar.caption("Click This Button To Hide Listing Data Table")
 hidedata_BTN = sidebar.button(label="Hide Data Table")
 sidebar.markdown("---")
-
 
 if showdata_BNT:
     st.markdown("""
@@ -79,15 +78,13 @@ with st.container():
 
         with col1:
 
-            with st.expander(label="Show Visualization"):
+            fig, ax = plt.subplots()
+            sns.kdeplot(x=listing_df['price'],
+                        hue=listing_df['country name'], ax=ax)
+            ax.set_xlabel("\nCountry Name", fontdict=FONT)
+            ax.set_ylabel("Density", fontdict=FONT)
 
-                fig, ax = plt.subplots()
-                sns.kdeplot(x=listing_df['price'],
-                            hue=listing_df['country name'], ax=ax)
-                ax.set_xlabel("\nCountry Name", fontdict=FONT)
-                ax.set_ylabel("Density", fontdict=FONT)
-
-                st.pyplot(fig)
+            st.pyplot(fig)
 
         st.markdown('---')
 
@@ -121,25 +118,33 @@ with st.container():
                 select_box1 = random.choice(neighbourhoods)
 
             price_distributionNei_select = price_trendNei_mean.loc[select_box1]
+
             fig, ax = plt.subplots()
             price_distributionNei_select.plot(kind="bar", ax=ax, stacked=False, color=[
                 "#293462", "#F24C4C", "#EC9B3B", "#F7D716"])
+
             for tick in ax.get_xticklabels():
                 tick.set_rotation(50)
+
             ax.legend(loc="center left", bbox_to_anchor=(1.03, 0.8))
             ax.set_xlabel("\nNeighbourhood", fontdict=FONT)
             ax.set_ylabel("Average Price", fontdict=FONT)
+
             st.pyplot(fig)
 
             # st.dataframe(price_trendNei_mean)
+
+            check_priceDisNei_avg = st.expander(
+                label="Check Table : Average Price Distribution by Neighbourhood")
+
+            with check_priceDisNei_avg:
+                st.dataframe(price_trendNei_mean)
 
         with col2:
             price_trendNei_median = listing_df[group].groupby(
                 feature).median().unstack()
 
             price_trendNei_median.fillna(0, inplace=True)
-
-            neighbourhoods = list(price_trendNei_median.index)
 
             select_box2 = st.multiselect(
                 label="Select Neighbourhood Median You Want To Visualize", options=neighbourhoods,
@@ -149,29 +154,30 @@ with st.container():
                 select_box2 = random.choice(neighbourhoods)
 
             price_distributionNei_select = price_trendNei_median.loc[select_box2]
+
             fig, ax = plt.subplots()
             price_distributionNei_select.plot(kind="bar", ax=ax, stacked=False, color=[
                 "#293462", "#F24C4C", "#EC9B3B", "#F7D716"])
+
             for tick in ax.get_xticklabels():
                 tick.set_rotation(50)
+
             ax.legend(loc="center left", bbox_to_anchor=(1.03, 0.8))
             ax.set_xlabel("\nNeighbourhood", fontdict=FONT)
             ax.set_ylabel("Median Price", fontdict=FONT)
             st.pyplot(fig)
 
-            # st.dataframe(price_trendNei_median)
+            check_priceDisNei_med = st.expander(
+                label="Check Table : Median Price Distribution by Neighbourhood")
 
-        check_priceDisNei = st.expander(
-            label="Check Table : Price Distribution by Neighbourhood")
+            with check_priceDisNei_med:
+                st.dataframe(price_trendNei_median)
 
         st.markdown('---')
 
-        with check_priceDisNei:
-            st.dataframe(price_trendNei_mean)
-
     # Question3
-    question1 = st.container()
-    with question1:
+    question3 = st.container()
+    with question3:
         st.markdown(
             """
             ##### Analysis Question 3. Does room type affect the price?
@@ -188,8 +194,10 @@ with st.container():
             fig, ax = plt.subplots()
             price_byRoom.plot(kind="bar", ax=ax,
                               stacked=False, color="#297F87")
+
             for tick in ax.get_xticklabels():
                 tick.set_rotation(0)
+
             ax.legend(loc="center left", bbox_to_anchor=(1.03, 0.8))
             ax.set_xlabel("\nRoom Type", fontdict=FONT)
             ax.set_ylabel("Average Price", fontdict=FONT)
@@ -198,13 +206,14 @@ with st.container():
 
         with col2:
 
-            with st.expander("Check Table : Price Distribution For Each Room Type"):
+            with st.expander("Check Table : Average Price Distribution For Each Room Type"):
                 st.dataframe(price_byRoom)
 
         st.markdown('---')
 
     # Question4
     question4 = st.container()
+
     with question4:
         st.markdown(
             """
@@ -214,7 +223,7 @@ with st.container():
         # avg_price1 = data1.merge(avg_price, left_on='id', right_on='listing_id')
 
         review_df = pd.read_csv(
-            "DQLab_reviews(22Sep2022).csv")
+            "D:\Portopolio\project 10 of 100 (DQLab Project)\Data\DQLab_reviews(22Sep2022).csv")
 
         order = listing_df.merge(
             review_df, left_on="id", right_on="listing_id")
@@ -244,10 +253,11 @@ with st.container():
 
         st.plotly_chart(fig)
 
-        with st.expander("Show Table Top 20 Orders Trend From 01-01-2018 to 22-09-2022"):
+        with st.expander("Check Table : Top 20 Orders Trend From 01-01-2018 to 22-09-2022"):
 
             top20_trendsOrder = order_df.sort_values(
                 by="Count", ascending=False).reset_index()
+            top20_trendsOrder.drop(labels=["index"], axis=1, inplace=True)
             st.dataframe(top20_trendsOrder.head(20))
 
         st.markdown("---")
