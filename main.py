@@ -272,7 +272,7 @@ with st.container():
 # ------------------------------------------------------------------------------------------------
 
     neighbourhoodsGroup_df = pd.read_csv(
-        "D:\Portopolio\project 10 of 100 (DQLab Project)\Data\DQLab_nieghbourhood(22Sep2022).csv")
+        "Data\DQLab_nieghbourhood(22Sep2022).csv")
     neighbourhoodsGroup_df = neighbourhoodsGroup_df.drop(
         labels=["Unnamed: 0"], axis=1)
 
