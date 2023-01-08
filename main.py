@@ -71,7 +71,7 @@ if hidedata_BTN:
 # MAIN PAGE
 with st.container():
     st.markdown("""
-            <h2 style='text-align: center; color: #18978F;'>AIRBNB SINGAPORE DATA ANALYSIS</h2>
+            <h2 style='text-align: center; color: #18978F;'>AIRBNB SINGAPORE LISTINGS DATA ANALYSIS</h2>
         """, unsafe_allow_html=True)
     st.caption("<h4 style='text-align: center; color: #18978F;'>Final Project Data Analyst Bootcamp With Python And SQL DQLab</h4>",
                unsafe_allow_html=True)
