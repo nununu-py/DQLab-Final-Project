@@ -97,8 +97,8 @@ with st.container():
 
             st.pyplot(fig)
 
-        with col2:
-
+#         with col2:
+          
 #             fig, ax = plt.subplots()
 #             sns.boxplot(data=listing_df, x="country name", y="price", ax=ax)
 #             ax.set_xlabel("\nCountry Name", fontdict=FONT)
