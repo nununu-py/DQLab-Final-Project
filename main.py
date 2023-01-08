@@ -353,7 +353,8 @@ for i in range(4):
     st.write("")
 
 st.markdown("""
-    <h5 style='text-align: center; color: #1746A2;'>For more airbnb data visualization, please visit my Friend streamlit webapp</h5>
+    <h5 style='text-align: center; color: #1746A2;'>For more airbnb singapore listing analysis and data visualization, \
+    kindly check my Friend streamlit webapp</h5>
 """, unsafe_allow_html=True)
 
 st.markdown("""
