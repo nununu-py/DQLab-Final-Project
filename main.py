@@ -261,3 +261,13 @@ with st.container():
             st.dataframe(top20_trendsOrder.head(20))
 
         st.markdown("---")
+        
+st.markdown("""
+
+    ## Create Link
+    [My Twitter](https://twitter.com/sleepinkMgkawak)
+    
+    > * twitter https://twitter.com/sleepinkMgkawak
+    > * email adiftawisnu818@gmail.com
+
+""")
