@@ -55,8 +55,8 @@ hidedata_BTN = sidebar.button(label="Hide Dataset Table")
 sidebar.markdown("---")
 sidebar.image(
     "https://skillacademy-prod-image.skillacademy.com/offline-marketplace/DQLab_Icon.png", width=150)
-sidebar.subheader("DQLab Bootcamp Final Projects")
-sidebar.subheader("Adifta Wisnu Wardana")
+sidebar.markdown("#### DQLab Bootcamp Final Projects")
+sidebar.markdown("#### Adifta Wisnu Wardana")
 
 
 if showdata_BNT:
