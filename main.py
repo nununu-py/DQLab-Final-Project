@@ -370,7 +370,7 @@ with st.container():
             ##### Analysis Question 5. How many listings have reviews above the average per each \
             neighborhood_group ?
             """)
-        col1, col2 col3 = st.columns(3, gap="large")
+        col1, col2, col3 = st.columns(3, gap="large")
 
         with col1:
 
