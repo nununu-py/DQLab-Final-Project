@@ -22,7 +22,7 @@ st.set_page_config(
 
 # READ DATA
 listing_df = pd.read_csv(
-    './Data/listing_byCountry.csv')
+    '.Data/listing_byCountry.csv')
 
 review_df = pd.read_csv(
     "./Data/DQLab_reviews(22Sep2022).csv")
@@ -57,6 +57,8 @@ sidebar.image(
     "https://skillacademy-prod-image.skillacademy.com/offline-marketplace/DQLab_Icon.png", width=150)
 sidebar.markdown("#### DQLab Bootcamp Final Projects")
 sidebar.markdown("#### Adifta Wisnu Wardana")
+sidebar.markdown(
+    """[My Linkedin Profile</h5>](https://www.linkedin.com/in/adifta-wisnu-wardana/)""", unsafe_allow_html=True)
 
 
 if showdata_BNT:
@@ -124,9 +126,9 @@ with st.container():
         tips1 = st.checkbox("Tips")
 
         if tips1:
-            st.warning("You can select and remove neighborhoods to visualize. Max number of \
-                        select neighbourhood : 7. If you dont select at least one, the programs \
-                        will randomly select one neighbourhood to visualize")
+            st.info("You can select and remove neighborhoods to visualize. Max number of \
+                    select neighbourhood : 7. If you dont select at least one, the programs \
+                    will randomly select one neighbourhood to visualize")
 
         # st.dataframe(listing_df.describe())
         price = ["price"]
@@ -175,7 +177,7 @@ with st.container():
                 tips2 = st.checkbox(label="Tips ")
 
                 if tips2:
-                    st.warning(
+                    st.info(
                         "Click on the price column to sort average price values ascending or descending")
 
                 st.dataframe(price_trendNei_mean)
@@ -216,7 +218,7 @@ with st.container():
                 tips3 = st.checkbox(label="Tips  ")
 
                 if tips3:
-                    st.warning(
+                    st.tips(
                         "Click on the price column to sort median price values ascending or descending")
 
                 st.dataframe(price_trendNei_median)
@@ -368,9 +370,9 @@ with st.container():
         st.markdown(
             """
             ##### Analysis Question 5. How many listings have reviews above the average per each \
-            neighborhood_group ?
+            neighborhood group ?
             """)
-        col1, col2, col3 = st.columns(3)
+        col1, col2 = st.columns(2)
 
         with col1:
 
@@ -381,32 +383,29 @@ with st.container():
                 margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
             fig.update_layout(yaxis_title="Total Listing",
-                              xaxis_title="Region", autosize=False, width=400, height=400)
-        
+                              xaxis_title="Region", autosize=False, width=500, height=500)
+
             st.plotly_chart(high_reviews_map)
-                
+
         with col2:
-                pass
-        
-        with col3:
-                
+
             data = high_reviews.groupby(['neighbourhood_group'])[
                 'name'].size().to_frame('Total Listing').reset_index()
-            
+
             for i in range(7):
                 st.write("")
-                
+
             fig = px.bar(
                 data,
                 x="neighbourhood_group",
                 y="Total Listing", color='neighbourhood_group')
-                
+
             fig.update_layout(yaxis_title="Total Listing",
-                              xaxis_title="Region", autosize=False, width=400, height=400)
-            
-            fig.update(layout_showlegend=False)
+                              xaxis_title="Region", autosize=False, width=600, height=400)
 
             st.plotly_chart(fig)
+
+        st.text_area(label="   ", value="From the results of the visualization above, it can be concluded that the property listings that have been reviewed above the average based on neighborhood groups are mostly located in the central region. This can happen because the central region area is also the area that has the highest number of property listings compared to the other neighborhood group areas. In addition, the central region is also the area with the most population in Singapore.")
 
         st.markdown('---')
 
