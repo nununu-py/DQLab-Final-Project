@@ -403,7 +403,7 @@ with st.container():
                 x="neighbourhood_group",
                 y="Total Listing", color='neighbourhood_group')
 
-            fig.update_layout(yaxis_title="Total Listing",
+            fig.update_layout(yaxis_title="Total Reviews",
                               xaxis_title="Region", autosize=False, width=400, height=400)
                 
             fig.update_layout(showlegend=False)
