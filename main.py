@@ -393,7 +393,7 @@ with st.container():
             data = high_reviews.groupby(['neighbourhood_group'])[
                 'name'].size().to_frame('Total Listing').reset_index()
             
-            for i in range(9):
+            for i in range(7):
                 st.write("")
                 
             fig = px.bar(
