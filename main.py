@@ -306,22 +306,27 @@ with st.container():
         order_df.columns = order_df.columns.str.replace('date', 'Date')
         order_df.columns = order_df.columns.str.replace(
             'Count', 'Total Orders')
+         
+        col1, col2 = st.columns(2)
+        
+        with col1:
 
-        fig = px.line(
-            order_df,
-            x="Date",
-            y="Total Orders"
-            # labels={
-            #     "date": "Date : ",  "Count": "Total Orders"
-            # }
-        )
+                fig = px.line(
+                    order_df,
+                    x="Date",
+                    y="Total Orders"
+                    # labels={
+                    #     "date": "Date : ",  "Count": "Total Orders"
+                    # }
+                )
 
-        fig.update_layout(yaxis_title="Total Orders",
-                          xaxis_title="Date from 01-01-2018 to 22-09-2022", autosize=False, width=1200, height=500)
+                fig.update_layout(yaxis_title="Total Orders",
+                                  xaxis_title="Date from 01-01-2018 to 22-09-2022", autosize=False, width=1200, height=500)
 
-        fig.update_traces(line_color='#59CE8F', line_width=1)
+                fig.update_traces(line_color='#59CE8F', line_width=1)
 
-        st.plotly_chart(fig)
+                st.plotly_chart(fig)
+        
 
         with st.expander("Dipaly table: Top 20 dates with the highest order in the last 5 years"):
 
