@@ -395,9 +395,6 @@ with st.container():
                 x="neighbourhood_group",
                 y="Total Listing", color='neighbourhood_group')
                 
-            for i in range(5):
-                st.write("")
-                
             fig.update_layout(yaxis_title="Total Listing",
                               xaxis_title="Region", autosize=False, width=400, height=400)
             
