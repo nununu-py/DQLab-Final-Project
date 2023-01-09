@@ -22,7 +22,7 @@ st.set_page_config(
 
 # READ DATA
 listing_df = pd.read_csv(
-    '.Data/listing_byCountry.csv')
+    './Data/listing_byCountry.csv')
 
 review_df = pd.read_csv(
     "./Data/DQLab_reviews(22Sep2022).csv")
