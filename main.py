@@ -6,10 +6,10 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 import seaborn as sns
 
-FONT = {'family': 'serif',
-        'color':  '#2C3639',
+FONT = {'family': 'Sans Serif',
+        'color':  '#0A2647',
         'weight': 'bold',
-        'size': 13,
+        'size': 11,
         }
 
 # SETTING WEB PAGE
@@ -48,13 +48,15 @@ listing_df = listing_df[15:][:]
 
 # SIDE BAR
 sidebar = st.sidebar
+sidebar.caption("Click this button to show listing data table")
+showdata_BNT = sidebar.button(label="Show Dataset Table")
+sidebar.caption("Click this button to hide listing data table")
+hidedata_BTN = sidebar.button(label="Hide Dataset Table")
+sidebar.markdown("---")
 sidebar.image(
-    "https://skillacademy-prod-image.skillacademy.com/offline-marketplace/DQLab_Icon.png")
-sidebar.markdown('---')
-sidebar.caption("Click This Button To Show Listing Data Table")
-showdata_BNT = sidebar.button(label="Show Data Table")
-sidebar.caption("Click This Button To Hide Listing Data Table")
-hidedata_BTN = sidebar.button(label="Hide Data Table")
+    "https://skillacademy-prod-image.skillacademy.com/offline-marketplace/DQLab_Icon.png", width=150)
+sidebar.subheader("Name : Adifta Wisnu Wardana")
+sidebar.subheader("DQLab Bootcamp Final Projects")
 
 if showdata_BNT:
     st.markdown("""<h2 style='text-align: center; color: orange ;'>Listing Data Table</h2>""",
@@ -71,7 +73,7 @@ if hidedata_BTN:
 # MAIN PAGE
 with st.container():
     st.markdown("""
-            <h2 style='text-align: center; color: #18978F;'>AIRBNB SINGAPORE LISTINGS DATA ANALYSIS</h2>
+            <h2 style='text-align: center; color: #18978F;'>AIRBNB SINGAPORE DATA ANALYSIS</h2>
         """, unsafe_allow_html=True)
     st.caption("<h4 style='text-align: center; color: #18978F;'>Final Project Data Analyst Bootcamp With Python And SQL DQLab</h4>",
                unsafe_allow_html=True)
@@ -82,7 +84,7 @@ with st.container():
     with question1:
         st.markdown(
             """
-            ##### Analysis Question 1. How is the distribution of airbnb listing prices in Singapore?
+            ##### Analysis Question 1. How is the distribution of Airbnb listing prices in Singapore ?
             """)
 
         col1, col2 = st.columns(2)
@@ -92,22 +94,22 @@ with st.container():
             fig, ax = plt.subplots()
             sns.kdeplot(x=listing_df['price'],
                         hue=listing_df['country name'], ax=ax)
-            ax.set_xlabel("\nCountry Name", fontdict=FONT)
+            ax.set_xlabel("\nPrices", fontdict=FONT)
             ax.set_ylabel("Density", fontdict=FONT)
 
             st.pyplot(fig)
 
-#         with col2:
-          
-#             fig, ax = plt.subplots()
-#             sns.boxplot(data=listing_df, x="country name", y="price", ax=ax)
-#             ax.set_xlabel("\nCountry Name", fontdict=FONT)
-#             ax.set_ylabel("Price", fontdict=FONT)
+        # with col2:
 
-#             st.pyplot(fig)
+        #     fig, ax = plt.subplots()
+        #     sns.boxplot(data=listing_df, x="country name", y="price", ax=ax)
+        #     ax.set_xlabel("\nCountry Name", fontdict=FONT)
+        #     ax.set_ylabel("Price", fontdict=FONT)
+
+        #     st.pyplot(fig)
 
         st.text_area(
-            label="", value="According to the diagrams above we can see the distribution of listing prices from Airbnb singapore from 2018 to 2022")
+            label="", value="According to the diagrams above we can see the distribution of listing prices from Airbnb singapore.")
         st.markdown('---')
 
     # Question2
@@ -115,8 +117,16 @@ with st.container():
     with question2:
         st.markdown(
             """
-            ##### Analysis Question 2. What are the average and median prices of the data per neighbourhood and room type?
+            ##### Analysis Question 2. What are the average and median prices of the data per neighborhood and room type ?
             """)
+
+        tips1 = st.checkbox("Tips")
+
+        if tips1:
+            st.warning("You can select and remove neighborhoods to visualize. Max number of \
+                        select neighbourhood : 7. If you dont select at least one, the programs \
+                        will randomly select one neighbourhood to visualize")
+
         # st.dataframe(listing_df.describe())
         price = ["price"]
         feature = ["neighbourhood", "room_type"]
@@ -133,7 +143,7 @@ with st.container():
             neighbourhoods = list(price_trendNei_mean.index)
 
             select_box1 = st.multiselect(
-                label="Select Neighbourhood Mean You Want To Visualize", options=neighbourhoods,
+                label="Select neighbourhood average price you want to visualize", options=neighbourhoods,
                 default=["Rochor", "Pasir Ris", "Marina South", "Southern Islands"], max_selections=7)
 
             if select_box1 == []:
@@ -157,9 +167,16 @@ with st.container():
             # st.dataframe(price_trendNei_mean)
 
             check_priceDisNei_avg = st.expander(
-                label="Check Table : Average Price Distribution by Neighbourhood")
+                label="Display table : Average price distribution by neighbourhood")
 
             with check_priceDisNei_avg:
+
+                tips2 = st.checkbox(label="Tips ")
+
+                if tips2:
+                    st.warning(
+                        "Click on the price column to sort average price values ascending or descending")
+
                 st.dataframe(price_trendNei_mean)
 
         with col2:
@@ -169,7 +186,7 @@ with st.container():
             price_trendNei_median.fillna(0, inplace=True)
 
             select_box2 = st.multiselect(
-                label="Select Neighbourhood Median You Want To Visualize", options=neighbourhoods,
+                label="Select neighbourhood average price you want to visualize", options=neighbourhoods,
                 default=["Rochor", "Pasir Ris", "Marina South", "Southern Islands"], max_selections=6)
 
             if select_box2 == []:
@@ -187,16 +204,24 @@ with st.container():
             ax.legend(loc="center left", bbox_to_anchor=(1.03, 0.8))
             ax.set_xlabel("\nNeighbourhood", fontdict=FONT)
             ax.set_ylabel("Median Price", fontdict=FONT)
+
             st.pyplot(fig)
 
             check_priceDisNei_med = st.expander(
-                label="Check Table : Median Price Distribution by Neighbourhood")
+                label="Display table : Median price distribution by neighbourhood")
 
             with check_priceDisNei_med:
+
+                tips3 = st.checkbox(label="Tips  ")
+
+                if tips3:
+                    st.warning(
+                        "Click on the price column to sort median price values ascending or descending")
+
                 st.dataframe(price_trendNei_median)
 
         st.text_area(
-            label=" ", value="By exploring the data visualization above, we can conclude that the neighborhood with the highest average price based on the room type \"Entire Home/apt\" is in Southern Island. The \"Private Room\" room type is in Marina South, the \"Hotel Room\" type is in the Rochor area and finally, the \"Shared Room\" is located in Pasir Ris neighbourhood, this can be happend because there aren't a lot of properties available for rent in this neighborhood area.")
+            label=" ", value="By exploring the visualization data above, it can be concluded that the neighborhoods with the highest average and highest median price based on room type \"Entire House/apartment\" are in Southern Island. The \"Private Room\" room type is in Marina South, the \"Hotel Room\" type is in the Rochor area, and finally, the \"Shared Room\" is located in the Pasir Ris neighborhood, this can happen because not many properties are available for rent in this neighborhood area.")
 
         st.markdown('---')
 
@@ -205,7 +230,7 @@ with st.container():
     with question3:
         st.markdown(
             """
-            ##### Analysis Question 3. Does room type affect the price?
+            ##### Analysis Question 3. Does room type affect the price ?
             """)
 
         col1, col2 = st.columns(2)
@@ -217,26 +242,36 @@ with st.container():
             price_byRoom = listing_df[price +
                                       feature].groupby('room_type').mean()
 
-            fig, ax = plt.subplots()
-            price_byRoom.plot(kind="bar", ax=ax,
-                              stacked=False, color="#47B5FF")
+            # OLD FIGURE
+            # fig, ax = plt.subplots()
 
-            for tick in ax.get_xticklabels():
-                tick.set_rotation(0)
+            # price_byRoom.plot(kind="bar", ax=ax,
+            #                   stacked=False, color="#47B5FF")
 
-            ax.legend(loc="center left", bbox_to_anchor=(1.03, 0.8))
-            ax.set_xlabel("\nRoom Type", fontdict=FONT)
-            ax.set_ylabel("Average Price", fontdict=FONT)
+            # for tick in ax.get_xticklabels():
+            #     tick.set_rotation(0)
 
-            st.pyplot(fig)
+            # ax.legend(loc="center left", bbox_to_anchor=(1.03, 0.8))
+            # ax.set_xlabel("\nRoom Type", fontdict=FONT)
+            # ax.set_ylabel("Average Price", fontdict=FONT)
 
-        with col2:
+            # st.pyplot(fig)
 
-            with st.expander("Check Table : Average Price Distribution For Each Room Type"):
+            fig = px.bar(data_frame=price_byRoom, x=price_byRoom.index,
+                         y="price", color=price_byRoom.index)
+
+            fig.update_layout(yaxis_title="Average Price",
+                              xaxis_title="Room Type", autosize=False, width=700, height=500)
+
+            fig.update_layout()
+
+            st.plotly_chart(fig)
+
+            with st.expander("Display table : Average price distribution for each room type"):
                 st.dataframe(price_byRoom)
 
         st.text_area(
-            label="  ", value="Based on the data visualization above, it can be clearly concluded that the room type greatly influences the price of a property for rent.")
+            label="  ", value="Based on the data visualization above, it can be concluded that the room type greatly influences the price of a property for rent.")
 
         st.markdown('---')
 
@@ -246,7 +281,7 @@ with st.container():
     with question4:
         st.markdown(
             """
-            ##### Analysis Question 4. How is the rental trend from 01-01-2018 to 22-09-2022?
+            ##### Analysis Question 4. How is the order trends from 01-01-2018 to 22-09-2022 ?
             """)
 
         # avg_price1 = data1.merge(avg_price, left_on='id', right_on='listing_id')
@@ -265,30 +300,35 @@ with st.container():
         order_df = order[feature +
                          date].groupby(date).size().to_frame("Count").reset_index()
 
+        order_df.columns = order_df.columns.str.replace('date', 'Date')
+        order_df.columns = order_df.columns.str.replace(
+            'Count', 'Total Orders')
+
         fig = px.line(
             order_df,
-            x="date",
-            y="Count",
-            labels={
-                "date": "Date From 01-01-2018 to 22-09-2022",  "Count": "Total Orders"
-            }
+            x="Date",
+            y="Total Orders"
+            # labels={
+            #     "date": "Date : ",  "Count": "Total Orders"
+            # }
         )
 
-        # fig.update_layout(
-        #     title="Orders Trends From From 01-01-2018 to 22-09-2022", title_x=0.5)
+        fig.update_layout(yaxis_title="Total Orders",
+                          xaxis_title="Date from 01-01-2018 to 22-09-2022", autosize=False, width=1200, height=500)
 
         fig.update_traces(line_color='#59CE8F', line_width=1)
 
         st.plotly_chart(fig)
 
-        with st.expander("Check Table : Top 20 Orders Trend From 01-01-2018 to 22-09-2022"):
+        with st.expander("Dipaly table: Top 20 dates with the highest order in the last 5 years"):
 
             top20_trendsOrder = order_df.sort_values(
-                by="Count", ascending=False).reset_index()
-            top20_trendsOrder.drop(labels=["index"], axis=1, inplace=True)
+                by="Total Orders", ascending=False).reset_index(drop=True)
+
             st.dataframe(top20_trendsOrder.head(20))
 
-        st.text_area(label="    ", value="According to the results of the data visualization with the line chart above, we can conclude that the trend order listing of all the highest room type and neighborhood categories is in the range from September 2019 to February 2020 and thereafter decreased until the following year. This could be due to an outbreak covid, so people prefer to stay at home. This listing trend only experienced an increase again in May 2022, because All remaining COVID-19 restrictions were lifted progressively on 29 March 2022 and 26 April 2022 but mask wearing is optional for some places.")
+        st.text_area(label="  ", value="Based on the results of the data visualization with the line chart above, it can be concluded that the highest trend of orders listings for all categories of room types and neighborhoods was in the range of September 2019 to February 2020 and then decreased in the following years. This could be due to the covid outbreak, so people prefer to stay at home. The trend of orders increased again in May 2022, because for the Singapore region all activity restrictions due to COVID-19 were progressively lifted on 29 March 2022.")
+
         st.markdown("---")
 
 # NEW FRAME
@@ -321,7 +361,6 @@ with st.container():
 
     # st.dataframe(high_reviews)
 
-    
     question5 = st.container()
 
     with question5:
@@ -330,27 +369,37 @@ with st.container():
             ##### Analysis Question 5. How many listings have reviews above the average per each \
             neighborhood_group ?
             """)
+        col1, col2 = st.columns(2)
 
-        high_reviews_map = px.scatter_mapbox(high_reviews, lat="latitude", lon="longitude", color="neighbourhood_group",
-                                             hover_name='name', zoom=9, width=750, hover_data=["room_type", "order"])
-        high_reviews_map.update_layout(mapbox_style="open-street-map")
-        high_reviews_map.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
-        st.plotly_chart(high_reviews_map)
+        with col1:
 
-        data = high_reviews.groupby(['neighbourhood_group'])[
-            'name'].size().to_frame('Total Listing').reset_index()
+            high_reviews_map = px.scatter_mapbox(high_reviews, lat="latitude", lon="longitude", color="neighbourhood_group",
+                                                 hover_name='name', zoom=9, width=750, hover_data=["room_type", "order"])
+            high_reviews_map.update_layout(mapbox_style="open-street-map")
+            high_reviews_map.update_layout(
+                margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
-        fig = px.bar(
-            data,
-            x="neighbourhood_group",
-            y="Total Listing", color='neighbourhood_group')
-        fig.update_layout(yaxis_title="Total Listing",
-                          xaxis_title="Region")
+            fig.update_layout(yaxis_title="Total Listing",
+                              xaxis_title="Region", autosize=False, width=500, height=500)
 
-        st.plotly_chart(fig)
+            st.plotly_chart(high_reviews_map)
+
+        with col2:
+
+            data = high_reviews.groupby(['neighbourhood_group'])[
+                'name'].size().to_frame('Total Listing').reset_index()
+
+            fig = px.bar(
+                data,
+                x="neighbourhood_group",
+                y="Total Listing", color='neighbourhood_group')
+
+            fig.update_layout(yaxis_title="Total Listing",
+                              xaxis_title="Region", autosize=False, width=600, height=400)
+
+            st.plotly_chart(fig)
 
         st.markdown('---')
-
 
 # FOOTER
 # ------------------------------------------------------------------------------------------------
@@ -365,7 +414,6 @@ st.markdown("""
 
 st.markdown("""
     
-    [<h5 style='text-align: center; color: #5F9DF7 ;'>Gustav Airbnb Project</h5>](https://gustavsmnt-airbnb-project-project-airbnb-uszn1j.streamlit.app/
-)
+    [<h5 style='text-align: center; color: #5F9DF7 ;'>Gustav Airbnb Project</h5>](https://twitter.com/sleepinkMgkawak/)
 
 """, unsafe_allow_html=True)
