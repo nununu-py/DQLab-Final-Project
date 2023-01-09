@@ -55,8 +55,9 @@ hidedata_BTN = sidebar.button(label="Hide Dataset Table")
 sidebar.markdown("---")
 sidebar.image(
     "https://skillacademy-prod-image.skillacademy.com/offline-marketplace/DQLab_Icon.png", width=150)
-sidebar.subheader("Name : Adifta Wisnu Wardana")
 sidebar.subheader("DQLab Bootcamp Final Projects")
+sidebar.subheader("Name : Adifta Wisnu Wardana")
+
 
 if showdata_BNT:
     st.markdown("""<h2 style='text-align: center; color: orange ;'>Listing Data Table</h2>""",
@@ -380,7 +381,7 @@ with st.container():
                 margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
             fig.update_layout(yaxis_title="Total Listing",
-                              xaxis_title="Region", autosize=False, width=500, height=500)
+                              xaxis_title="Region", autosize=False, width=400, height=400)
 
             st.plotly_chart(high_reviews_map)
 
@@ -414,6 +415,6 @@ st.markdown("""
 
 st.markdown("""
     
-    [<h5 style='text-align: center; color: #5F9DF7 ;'>Gustav Airbnb Project</h5>](https://twitter.com/sleepinkMgkawak/)
+    [<h5 style='text-align: center; color: #5F9DF7 ;'>Gustav Airbnb Project</h5>](https://gustavsmnt-airbnb-project-project-airbnb-uszn1j.streamlit.app/)
 
 """, unsafe_allow_html=True)
