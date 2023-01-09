@@ -218,7 +218,7 @@ with st.container():
                 tips3 = st.checkbox(label="Tips  ")
 
                 if tips3:
-                    st.tips(
+                    st.info(
                         "Click on the price column to sort median price values ascending or descending")
 
                 st.dataframe(price_trendNei_median)
