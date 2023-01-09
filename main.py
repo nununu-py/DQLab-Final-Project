@@ -56,7 +56,7 @@ sidebar.markdown("---")
 sidebar.image(
     "https://skillacademy-prod-image.skillacademy.com/offline-marketplace/DQLab_Icon.png", width=150)
 sidebar.subheader("DQLab Bootcamp Final Projects")
-sidebar.subheader("Name : Adifta Wisnu Wardana")
+sidebar.subheader("Adifta Wisnu Wardana")
 
 
 if showdata_BNT:
