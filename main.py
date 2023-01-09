@@ -404,7 +404,7 @@ with st.container():
                 y="Total Listing", color='neighbourhood_group')
 
             fig.update_layout(yaxis_title="Total Listing",
-                              xaxis_title="Region", autosize=False, width=400, height=400)
+                              xaxis_title="Region", autosize=False, width=420, height=420)
             
             fig.update(layout_showlegend=False)
 
