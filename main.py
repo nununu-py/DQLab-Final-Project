@@ -264,7 +264,7 @@ with st.container():
                          y="price", color=price_byRoom.index)
 
             fig.update_layout(yaxis_title="Average Price",
-                              xaxis_title="Room Type", autosize=False, width=600, height=500)
+                              xaxis_title="Room Type", autosize=False, width=700, height=500)
 
             fig.update_layout()
 
@@ -317,7 +317,7 @@ with st.container():
         )
 
         fig.update_layout(yaxis_title="Total Orders",
-                          xaxis_title="Date from 01-01-2018 to 22-09-2022", autosize=False, width=800, height=500)
+                          xaxis_title="Date from 01-01-2018 to 22-09-2022", autosize=False, width=1200, height=500)
 
         fig.update_traces(line_color='#59CE8F', line_width=1)
 
@@ -372,7 +372,7 @@ with st.container():
             ##### Analysis Question 5. How many listings have reviews above the average per each \
             neighborhood group ?
             """)
-        col1, col = st.columns(2, gap="large")
+        col1, col2 = st.columns(2)
 
         with col1:
 
@@ -386,7 +386,7 @@ with st.container():
                               xaxis_title="Region", autosize=False, width=500, height=500)
 
             st.plotly_chart(high_reviews_map)
-        
+
         with col2:
 
             data = high_reviews.groupby(['neighbourhood_group'])[
@@ -401,9 +401,7 @@ with st.container():
                 y="Total Listing", color='neighbourhood_group')
 
             fig.update_layout(yaxis_title="Total Listing",
-                              xaxis_title="Region", autosize=False, width=420, height=420)
-            
-            fig.update(layout_showlegend=False)
+                              xaxis_title="Region", autosize=False, width=400, height=400)
 
             st.plotly_chart(fig)
 
