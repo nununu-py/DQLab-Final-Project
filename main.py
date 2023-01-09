@@ -264,7 +264,7 @@ with st.container():
                          y="price", color=price_byRoom.index)
 
             fig.update_layout(yaxis_title="Average Price",
-                              xaxis_title="Room Type", autosize=False, width=700, height=500)
+                              xaxis_title="Room Type", autosize=False, width=600, height=500)
 
             fig.update_layout()
 
