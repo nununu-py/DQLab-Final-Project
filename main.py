@@ -372,7 +372,7 @@ with st.container():
             ##### Analysis Question 5. How many listings have reviews above the average per each \
             neighborhood group ?
             """)
-        col1, col2, col3 = st.columns(3)
+        col1, col2= st.columns(3, gap="large")
 
         with col1:
 
@@ -388,9 +388,6 @@ with st.container():
             st.plotly_chart(high_reviews_map)
         
         with col2:
-                pass
-        
-        with col3:
 
             data = high_reviews.groupby(['neighbourhood_group'])[
                 'name'].size().to_frame('Total Listing').reset_index()
