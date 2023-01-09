@@ -393,7 +393,7 @@ with st.container():
         with col3:
 
             data = high_reviews.groupby(['neighbourhood_group'])[
-                'name'].size().to_frame('Total Listing').reset_index()
+                'name'].size().to_frame('Total Reviews').reset_index()
 
             for i in range(7):
                 st.write("")
