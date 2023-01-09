@@ -382,7 +382,7 @@ with st.container():
             high_reviews_map.update_layout(
                 margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
-            fig.update_layout(yaxis_title="Total Listing",
+            fig.update_layout(yaxis_title="Total Review",
                               xaxis_title="Region", autosize=False, width=400, height=400)
 
             st.plotly_chart(high_reviews_map)
