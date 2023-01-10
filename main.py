@@ -317,7 +317,7 @@ with st.container():
         )
 
         fig.update_layout(yaxis_title="Total Orders",
-                          xaxis_title="Date from 01-01-2018 to 22-09-2022", autosize=False, width=1000, height=500)
+                          xaxis_title="Date from 01-01-2018 to 22-09-2022", autosize=False, width=1100, height=500)
 
         fig.update_traces(line_color='#59CE8F', line_width=1)
 
