@@ -373,7 +373,7 @@ with st.container():
             neighborhood group ?
             """)
         
-        col1, col2 = st.columns(2, gap="large")
+        col1, col2 = st.columns(2, gap="medium")
         
         with st.container():
                 
