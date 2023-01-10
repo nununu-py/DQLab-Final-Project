@@ -373,42 +373,43 @@ with st.container():
             neighborhood group ?
             """)
         col1, col2 = st.columns(2)
-
-        with col1:
-
-            high_reviews_map = px.scatter_mapbox(high_reviews, lat="latitude", lon="longitude", color="neighbourhood_group",
-                                                 hover_name='name', zoom=9, width=750, hover_data=["room_type", "order"])
-            high_reviews_map.update_layout(mapbox_style="open-street-map")
-            high_reviews_map.update_layout(
-                margin={"r": 0, "t": 0, "l": 0, "b": 0})
-
-            fig.update_layout(yaxis_title="Total Review",
-                              xaxis_title="Region", autosize=False, width=400, height=400)
-
-            st.plotly_chart(high_reviews_map)
         
-        with col2:
-#                 pass
-        
-#         with col3:
-
-            data = high_reviews.groupby(['neighbourhood_group'])[
-                'name'].size().to_frame('Total Reviews').reset_index()
-
-            for i in range(7):
-                st.write("")
-
-            fig = px.bar(
-                data,
-                x="neighbourhood_group",
-                y="Total Reviews", color='neighbourhood_group')
-
-            fig.update_layout(yaxis_title="Total Reviews",
-                              xaxis_title="Region", autosize=False, width=400, height=400)
+        with st.container():
                 
-            fig.update_layout(showlegend=False)
+                with col1:
 
-            st.plotly_chart(fig)
+                    high_reviews_map = px.scatter_mapbox(high_reviews, lat="latitude", lon="longitude", color="neighbourhood_group",
+                                                         hover_name='name', zoom=9, width=750, hover_data=["room_type", "order"])
+                    high_reviews_map.update_layout(mapbox_style="open-street-map")
+                    high_reviews_map.update_layout(
+                        margin={"r": 0, "t": 0, "l": 0, "b": 0})
+
+                    fig.update_layout(yaxis_title="Total Review",
+                                      xaxis_title="Region", autosize=False, width=400, height=400)
+
+                    st.plotly_chart(high_reviews_map)
+                
+        with st.container():
+                
+                with col2:
+
+                    data = high_reviews.groupby(['neighbourhood_group'])[
+                        'name'].size().to_frame('Total Reviews').reset_index()
+
+                    for i in range(7):
+                        st.write("")
+
+                    fig = px.bar(
+                        data,
+                        x="neighbourhood_group",
+                        y="Total Reviews", color='neighbourhood_group')
+
+                    fig.update_layout(yaxis_title="Total Reviews",
+                                      xaxis_title="Region", autosize=False, width=400, height=400)
+
+                    fig.update_layout(showlegend=False)
+
+                    st.plotly_chart(fig)
 
         st.text_area(label="   ", value="From the results of the visualization above, it can be concluded that the property listings that have been reviewed above the average based on neighborhood groups are mostly located in the central region. This can happen because the central region area is also the area that has the highest number of property listings compared to the other neighborhood group areas. In addition, the central region is also the area with the most population in Singapore.")
 
