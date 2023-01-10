@@ -372,7 +372,8 @@ with st.container():
             ##### Analysis Question 5. How many listings have reviews above the average per each \
             neighborhood group ?
             """)
-        col1, col2 = st.columns(2)
+        
+        col1, col2 = st.columns(2, gap="large")
         
         with st.container():
                 
@@ -396,7 +397,7 @@ with st.container():
                     data = high_reviews.groupby(['neighbourhood_group'])[
                         'name'].size().to_frame('Total Reviews').reset_index()
 
-                    for i in range(7):
+                    for i in range(8):
                         st.write("")
 
                     fig = px.bar(
