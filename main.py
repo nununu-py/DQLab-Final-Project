@@ -243,7 +243,7 @@ with st.container():
         fig.update_layout(yaxis_title="Total Orders",
                           xaxis_title="Datetime", 
                           autosize=False, 
-                          width=1360, 
+                          width=1340, 
                           height=500)
 
         fig.update_traces(line_color='#277BC0', line_width=1.5)
@@ -316,16 +316,17 @@ with st.container():
                     filter5 = ((merge_data['order'] > list_average_order[4]) & (merge_data['neighbourhood_group'] == 'West Region'))
                     
                     high_orders = merge_data[filter1 | filter2 | filter3 | filter4 | filter5]
-                    data_to_viz = high_orders['neighbourhood_group'].value_counts().to_frame()
-
+                    data_to_viz = high_orders[['neighbourhood_group', 'order']].groupby('neighbourhood_group').agg({'order':'count'})
+            
                     st.write("")
 
                     fig = px.bar(
                         data_to_viz,
                         x=data_to_viz.index,
-                        y='neighbourhood_group', 
+                        y='order', 
                         color=data_to_viz.index,
-                        color_discrete_sequence=['#CA4E79', '#6E85B7', '#497174', '#3AB4F2', '#FFA500'])
+                        color_discrete_sequence=['#CA4E79', '#6E85B7', '#497174', '#3AB4F2', '#FFA500'],
+                        title='Count listing property above average orders')
                     
                     fig.update_layout(yaxis_title="Total Counts",
                                       xaxis_title="Neighbourhood", 
